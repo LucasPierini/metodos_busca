@@ -1,7 +1,16 @@
+from typing import List
 from enum import Enum
+
+class NodeStatus(Enum):
+    ''' Utilizado nas Buscas em Largura, Profundidade e Backtracking '''
+    LIVRE = 0
+    ABERTO = 1
+    VISITADO = 2
+    FECHADO = 3
 
 
 class RelationStatus(Enum):
+    ''' Utilizado nas Buscas Ordenadas'''
     NOVA = 0
     ABERTO = 1
     EXPLORADO = 2
@@ -12,11 +21,16 @@ class Node(object):
 
     def __init__(self, name):
         self.name = name.upper()
-        self.relations = []
+        self.relations: List[NodeRelation] = []
+        self.adjacent_node: List[Node] = []
+        self.status = NodeStatus.LIVRE
         self.parent = None
 
     def __str__(self):
         return self.name
+
+    def add_adjacent_node(self, node):
+        self.adjacent_node.append(node)
 
 
 class NodeRelation(object):
@@ -105,3 +119,13 @@ def find_relation(node1, node2, relation_list):
             return rel
 
     return False
+
+
+class Map(object):
+    ''' Funciona como uma lista que guarda todos os nós e suas relações'''
+
+    def __init__(self):
+        self.nodes = []
+        self.relations = []
+        self.start_node = None
+        self.end_node = None
