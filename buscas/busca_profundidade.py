@@ -28,19 +28,22 @@ def busca_em_profundidade(map):
             final_node_path = create_path_string(node)
 
         else:
-            if not success:
+            print('\n * Verificando nó', node.name, 'buscando nós adjacentes não visitados')
 
-                # Para cada nó adjacente, faça...
-                for adjacent in reversed(node.adjacent_node):
+            # Para cada nó adjacente, faça...
+            for adjacent in reversed(node.adjacent_node):
 
-                    # Se o nó adjacente estiver a abrir
-                    if adjacent.status == NodeStatus.LIVRE and not success:
-                        # Define o nó atual como raíz do nó adjacente
-                        adjacent.parent = node
-                        queue.append(adjacent)
+                # Se o nó adjacente estiver a abrir
+                if adjacent.status == NodeStatus.LIVRE:
+                    print(' ** Nó', adjacent.name, 'encontrado!')
+
+                    # Define o nó atual como raíz do nó adjacente
+                    adjacent.parent = node
+                    queue.append(adjacent)
 
         # Remove o último elemento da fila
         node.status = NodeStatus.FECHADO
+        print(' *** Nó', node.name, 'verificado.')
 
     # Remove o último ' > ' da string
     visiting_node_path = visiting_node_path[:-3]
@@ -56,17 +59,19 @@ def busca_em_profundidade(map):
 
 
 
-def printa_busca_em_profundidade(map):
+def printa_busca_em_profundidade(map_list):
+    for map in map_list:
+        if map.type == SearchTypes.NAO_ORDENADA:
 
-    print('\n- Realizando Busca em Profundidade...')
+            print('- Realizando Busca em Profundidade em:', map.name, '\n')
+            return_dict = busca_em_profundidade(map)
 
-    return_dict = busca_em_profundidade(map)
+            if return_dict['success']:
+                print('\n- O nó', map.end_node.name, 'foi encontrado!\n'
+                      '- Caminho percorrido:', return_dict['visiting_node_path'],'\n'
+                      '- Caminho até o nó:', return_dict['final_node_path']
+                      )
 
-    if return_dict['success']:
-        print('    - O nó', map.end_node.name, 'foi encontrado!')
-        print('    - Caminho percorrido:', return_dict['visiting_node_path'])
-        print('    - Caminho até o nó:', return_dict['final_node_path'])
-
-    else:
-        print('    - O nó não pôde ser encontrado! :(')
+            else:
+                print('- O nó não pôde ser encontrado! :(')
 

@@ -28,12 +28,15 @@ def busca_em_largura(map):
 
         else:
             if not success:
+                print('\n * Verificando nó', node.name, 'buscando nós adjacentes não visitados')
 
                 # Para cada nó adjacente, faça...
                 for adjacent in node.adjacent_node:
 
                     # Se o nó adjacente estiver a abrir
-                    if adjacent.status == NodeStatus.LIVRE and not success:
+                    if adjacent.status == NodeStatus.LIVRE:
+                        print(' ** Nó', adjacent.name, 'encontrado!')
+
                         # Define o nó atual como raíz do nó adjacente
                         adjacent.status = NodeStatus.ABERTO
                         adjacent.parent = node
@@ -42,6 +45,7 @@ def busca_em_largura(map):
         # Remove o primeiro elemento da fila
         node.status = NodeStatus.FECHADO
         queue.pop(0)
+        print(' *** Nó', node.name, 'verificado.')
 
     # Remove o último ' > ' da string
     visiting_node_path = visiting_node_path[:-3]
@@ -57,17 +61,19 @@ def busca_em_largura(map):
 
 
 
-def printa_busca_em_largura(map):
+def printa_busca_em_largura(map_list):
+    for map in map_list:
+        if map.type == SearchTypes.NAO_ORDENADA:
 
-    print('\n- Realizando Busca em Largura...')
+            print('- Realizando Busca em Largura em:', map.name, '\n')
+            return_dict = busca_em_largura(map)
 
-    return_dict = busca_em_largura(map)
+            if return_dict['success']:
+                print('\n- O nó', map.end_node.name, 'foi encontrado!\n'
+                      '- Caminho percorrido:', return_dict['visiting_node_path'],'\n'
+                      '- Caminho até o nó:', return_dict['final_node_path']
+                      )
 
-    if return_dict['success']:
-        print('\t- O nó', map.end_node.name, 'foi encontrado!')
-        print('\t- Caminho percorrido:', return_dict['visiting_node_path'])
-        print('\t- Caminho até o nó:', return_dict['final_node_path'])
-
-    else:
-        print('\t- O nó não pôde ser encontrado! :(')
+            else:
+                print('- O nó não pôde ser encontrado! :(')
 

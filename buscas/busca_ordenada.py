@@ -2,7 +2,7 @@ from typing import List
 from common import *
 
 def busca_ordenada(map):
-    print('\n- Realizando Busca Ordenada:')
+    print('- Realizando Busca Ordenada:')
 
     success = False
     path_distance = 0
@@ -46,15 +46,18 @@ def busca_ordenada(map):
 
 
 
-def printa_busca_ordenada(map):
-    _dict = busca_ordenada(map)
+def printa_busca_ordenada(map_list):
+    for map in map_list:
+        if map.type == SearchTypes.ORDENADA:
+            print('\n~~~~~~~~~~ ' + map.name + ' ~~~~~~~~~~\n')
+            _dict = busca_ordenada(map)
 
-    print('\n')
+            print('\n')
 
-    if _dict['success']:
-        print('- O nó', map.end_node, 'foi encontrado!')
-        print('- Menor Percurso até o nó:', _dict['path_string'])
-        print('- Distância total até o nó:', _dict['distance'])
+            if _dict['success']:
+                print('- O nó', map.end_node, 'foi encontrado!')
+                print('- Menor Percurso até o nó:', _dict['path_string'])
+                print('- Distância total até o nó:', _dict['distance'])
 
-    else:
-        print('- O nó', map.end_node, 'não pôde ser encontrado! :(')
+            else:
+                print('- O nó', map.end_node, 'não pôde ser encontrado! :(')

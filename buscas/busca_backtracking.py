@@ -69,17 +69,20 @@ def busca_backtracking(actual_node, final_node, success=False, vis_np=None, fin_
 
 
 
-def printa_busca_backtracking(map):
-    print('\n- Realizando Backtracking...')
+def printa_busca_backtracking(map_list):
+    for map in map_list:
+        if map.type == SearchTypes.NAO_ORDENADA:
 
-    return_dict = busca_backtracking(map.start_node, map.end_node)
+            print('- Realizando Backtracking em:', map.name, '\n')
+            return_dict = busca_backtracking(map.start_node, map.end_node)
 
-    if return_dict['success']:
-        print('\t- O nó', map.end_node.name, 'foi encontrado!')
-        print('    - Caminho percorrido:', return_dict['visiting_node_path'])
-        print('    - Caminho até o nó:', return_dict['final_node_path'])
+            if return_dict['success']:
+                print('\n\t\t- O nó', map.end_node.name, 'foi encontrado!\n'
+                      '\t\t- Caminho percorrido:', return_dict['visiting_node_path'],'\n'
+                      '\t\t- Caminho até o nó:', return_dict['final_node_path']
+                      )
 
-    else:
-        print('    - O nó não pôde ser encontrado! :(')
+            else:
+                print('\t\t- O nó não pôde ser encontrado! :(')
 
-    reset(map)
+            reset(map)
