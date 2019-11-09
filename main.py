@@ -1,9 +1,9 @@
 from maps import MAPA_BUSCAS_NAO_ORDENADAS, MAPA_BUSCA_ORDENADA_1, MAPA_BUSCA_ORDENADA_2
 
-from busca_largura      import printa_busca_em_largura
-from busca_profundidade import printa_busca_em_profundidade
-from busca_backtracking import printa_busca_backtracking
-from busca_ordenada     import printa_busca_ordenada
+from buscas.busca_largura      import printa_busca_em_largura
+from buscas.busca_profundidade import printa_busca_em_profundidade
+from buscas.busca_backtracking import printa_busca_backtracking
+from buscas.busca_ordenada     import printa_busca_ordenada
 
 
 while True:
