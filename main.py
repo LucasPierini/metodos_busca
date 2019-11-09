@@ -1,5 +1,6 @@
 from busca_ordenada import *
 from busca_largura import *
+from busca_backtracking import *
 from maps import MAPA_BUSCAS_NAO_ORDENADAS, MAPA_BUSCA_ORDENADA_1, MAPA_BUSCA_ORDENADA_2
 
 while True:
@@ -20,16 +21,16 @@ while True:
     user_input = input('Selecione: ')
     print('\n')
 
-    # ---------------------------- #
-    # ----- Busca em Largura ----- #
-    # ---------------------------- #
     if user_input == 1 or user_input == '1':
         busca_em_largura()
 
+    elif user_input == 3 or user_input == '3':
+        busca_backtracking()
 
-    # --------------------------------- #
-    # ----- Busca em Profundidade ----- #
-    # --------------------------------- #
+    elif user_input == 4 or user_input == '4':
+        busca_ordenada()
+
+
     elif user_input == 2 or user_input == '2':
         print('\n- Realizando Busca em Profundidade...')
 
@@ -44,25 +45,7 @@ while True:
             print('    - O nó não pôde ser encontrado! :(')
 
 
-    # --------------------------------- #
-    # ----- Busca em Backtracking ----- #
-    # --------------------------------- #
-    elif user_input == 3 or user_input == '3':
-        print('\n- Realizando Backtracking...')
 
-        return_dict = backtracking(initial_node, final_node)
-
-        if return_dict['success']:
-            print('    - O nó', final_node.name, 'foi encontrado!')
-            print('    - Caminho percorrido:', return_dict['visiting_node_path'])
-            print('    - Caminho até o nó:', return_dict['final_node_path'])
-
-        else:
-            print('    - O nó não pôde ser encontrado! :(')
-
-
-    elif user_input == 4 or user_input == '4':
-        busca_ordenada()
 
     # ------------------ #
     # ----- Saindo ----- #
