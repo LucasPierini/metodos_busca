@@ -10,23 +10,27 @@ class NodeStatus(Enum):
 
 
 class RelationStatus(Enum):
-    ''' Utilizado nas Buscas Ordenadas'''
+    ''' Utilizado nas Buscas Ordenadas e Informadas'''
     NOVA = 0
     ABERTO = 1
     EXPLORADO = 2
 
 
 class Node(object):
-    ''' Indica um nó no percurso e seu status '''
+    ''' Indica um nó no percurso e seus atributos '''
 
-    def __init__(self, name):
+    def __init__(self, name, cost=0):
         self.name = name.upper()
         self.relations: List[NodeRelation] = []
         self.adjacent_node: List[Node] = []
         self.status = NodeStatus.LIVRE
         self.parent = None
+        self.cost = cost
 
     def __str__(self):
+        return self.name
+
+    def __repr__(self):
         return self.name
 
     def add_adjacent_node(self, node):
@@ -34,7 +38,7 @@ class Node(object):
 
 
 class NodeRelation(object):
-    ''' Indica a relação entre dois nós e sua distância. '''
+    ''' Indica a relação entre dois nós e sua distância e custo. '''
 
     def __init__(self, node1, node2, distance):
         self.node_1 = node1

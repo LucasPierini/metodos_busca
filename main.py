@@ -1,7 +1,10 @@
-from busca_ordenada import *
-from busca_largura import *
-from busca_backtracking import *
 from maps import MAPA_BUSCAS_NAO_ORDENADAS, MAPA_BUSCA_ORDENADA_1, MAPA_BUSCA_ORDENADA_2
+
+from busca_largura      import printa_busca_em_largura
+from busca_profundidade import printa_busca_em_profundidade
+from busca_backtracking import printa_busca_backtracking
+from busca_ordenada     import printa_busca_ordenada
+
 
 while True:
 
@@ -13,38 +16,36 @@ while True:
     print('2. Realizar Busca em Profundidade')
     print('3. Realizar Backtracking')
     print('4. Realizar Busca Ordenada')
-    print('5. Realizar Busca ???')
-    print('6. Realizar Busca A Estrela')
+    print('X. Realizar Busca Gulosa')
+    print('X. Realizar Busca A*')
 
     print('\n0. Sair \n')
 
     user_input = input('Selecione: ')
     print('\n')
 
-    if user_input == 1 or user_input == '1':
-        busca_em_largura()
-
-    elif user_input == 3 or user_input == '3':
-        busca_backtracking()
-
-    elif user_input == 4 or user_input == '4':
-        busca_ordenada()
-
+    if   user_input == 1 or user_input == '1':
+        printa_busca_em_largura(MAPA_BUSCAS_NAO_ORDENADAS)
 
     elif user_input == 2 or user_input == '2':
-        print('\n- Realizando Busca em Profundidade...')
+        printa_busca_em_profundidade(MAPA_BUSCAS_NAO_ORDENADAS)
 
-        return_dict = busca_em_profundidade(initial_node, final_node)
+    elif user_input == 3 or user_input == '3':
+        printa_busca_backtracking(MAPA_BUSCAS_NAO_ORDENADAS)
 
-        if return_dict['success']:
-            print('    - O nó', final_node.name, 'foi encontrado!')
-            print('    - Caminho percorrido:', return_dict['visiting_node_path'])
-            print('    - Caminho até o nó:', return_dict['final_node_path'])
-
-        else:
-            print('    - O nó não pôde ser encontrado! :(')
-
-
+    elif user_input == 4 or user_input == '4':
+        print('\n'
+              '# -------------------------------------- #\n'
+              '# --------------- Mapa 1 --------------- #\n'
+              '# -------------------------------------- #\n'
+              )
+        printa_busca_ordenada(MAPA_BUSCA_ORDENADA_1)
+        print('\n'
+              '# -------------------------------------- #\n'
+              '# --------------- Mapa 2 --------------- #\n'
+              '# -------------------------------------- #\n'
+              )
+        printa_busca_ordenada(MAPA_BUSCA_ORDENADA_2)
 
 
     # ------------------ #

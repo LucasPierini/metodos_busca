@@ -136,13 +136,13 @@ MAPA_BUSCAS_NAO_ORDENADAS.end_node = MAPA_BUSCAS_NAO_ORDENADAS.nodes[-1]
 # --------------------------- #
 MAPA_BUSCA_ORDENADA_1 = Map()
 
-MAPA_BUSCA_ORDENADA_1.nodes.append(Node('A'))   # 0
-MAPA_BUSCA_ORDENADA_1.nodes.append(Node('B'))   # 1
-MAPA_BUSCA_ORDENADA_1.nodes.append(Node('C'))   # 2
-MAPA_BUSCA_ORDENADA_1.nodes.append(Node('D'))   # 3
-MAPA_BUSCA_ORDENADA_1.nodes.append(Node('E'))   # 4
-MAPA_BUSCA_ORDENADA_1.nodes.append(Node('F'))   # 5
-MAPA_BUSCA_ORDENADA_1.nodes.append(Node('G'))   # 6
+MAPA_BUSCA_ORDENADA_1.nodes.append(Node('A', 24))   # 0
+MAPA_BUSCA_ORDENADA_1.nodes.append(Node('B', 15))   # 1
+MAPA_BUSCA_ORDENADA_1.nodes.append(Node('C', 22))   # 2
+MAPA_BUSCA_ORDENADA_1.nodes.append(Node('D', 12))   # 3
+MAPA_BUSCA_ORDENADA_1.nodes.append(Node('E', 7))    # 4
+MAPA_BUSCA_ORDENADA_1.nodes.append(Node('F', 7))    # 5
+MAPA_BUSCA_ORDENADA_1.nodes.append(Node('G', 0))    # 6
 
 # --------------------------------- #
 # ----- Conexões entre os Nós ----- #
@@ -186,13 +186,13 @@ MAPA_BUSCA_ORDENADA_1.end_node = MAPA_BUSCA_ORDENADA_1.nodes[-1]
 # --------------------------- #
 MAPA_BUSCA_ORDENADA_2 = Map()
 
-MAPA_BUSCA_ORDENADA_2.nodes.append(Node('A'))  # 0
-MAPA_BUSCA_ORDENADA_2.nodes.append(Node('B'))  # 1
-MAPA_BUSCA_ORDENADA_2.nodes.append(Node('C'))  # 2
-MAPA_BUSCA_ORDENADA_2.nodes.append(Node('D'))  # 3
-MAPA_BUSCA_ORDENADA_2.nodes.append(Node('E'))  # 4
-MAPA_BUSCA_ORDENADA_2.nodes.append(Node('F'))  # 5
-MAPA_BUSCA_ORDENADA_2.nodes.append(Node('G'))  # 6
+MAPA_BUSCA_ORDENADA_2.nodes.append(Node('A', 16))   # 0
+MAPA_BUSCA_ORDENADA_2.nodes.append(Node('B', 13))   # 1
+MAPA_BUSCA_ORDENADA_2.nodes.append(Node('C', 15))   # 2
+MAPA_BUSCA_ORDENADA_2.nodes.append(Node('D', 7))    # 3
+MAPA_BUSCA_ORDENADA_2.nodes.append(Node('E', 10))   # 4
+MAPA_BUSCA_ORDENADA_2.nodes.append(Node('F', 10))   # 5
+MAPA_BUSCA_ORDENADA_2.nodes.append(Node('G', 0))    # 6
 
 # --------------------------------- #
 # ----- Conexões entre os Nós ----- #

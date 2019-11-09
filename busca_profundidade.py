@@ -1,8 +1,8 @@
 from common import *
 
-def busca_em_largura(map):
+def busca_em_profundidade(map):
     """
-    Realiza uma Busca em Largura, retornando se encontrou o nó,
+    Realiza uma Busca em Profundidade, retornando se encontrou o nó,
     qual o caminho realizado e qual o caminho encontrado até o nó.
 
     :param map: Mapa contendo os nós, o nó final e nó inicial
@@ -16,8 +16,9 @@ def busca_em_largura(map):
     queue = []
     queue.append(map.start_node)
 
-    while len(queue):
-        node = queue[0]
+    while len(queue) and not success:
+        node = queue[-1]
+        queue = [x for x in queue if x != node]
         node.status = NodeStatus.VISITADO
         visiting_node_path = visiting_node_path + node.name + ' > '
 
@@ -30,18 +31,16 @@ def busca_em_largura(map):
             if not success:
 
                 # Para cada nó adjacente, faça...
-                for adjacent in node.adjacent_node:
+                for adjacent in reversed(node.adjacent_node):
 
                     # Se o nó adjacente estiver a abrir
                     if adjacent.status == NodeStatus.LIVRE and not success:
                         # Define o nó atual como raíz do nó adjacente
-                        adjacent.status = NodeStatus.ABERTO
                         adjacent.parent = node
                         queue.append(adjacent)
 
-        # Remove o primeiro elemento da fila
+        # Remove o último elemento da fila
         node.status = NodeStatus.FECHADO
-        queue.pop(0)
 
     # Remove o último ' > ' da string
     visiting_node_path = visiting_node_path[:-3]
@@ -57,11 +56,11 @@ def busca_em_largura(map):
 
 
 
-def printa_busca_em_largura(map):
+def printa_busca_em_profundidade(map):
 
-    print('\n- Realizando Busca em Largura...')
+    print('\n- Realizando Busca em Profundidade...')
 
-    return_dict = busca_em_largura(map)
+    return_dict = busca_em_profundidade(map)
 
     if return_dict['success']:
         print('    - O nó', map.end_node.name, 'foi encontrado!')
