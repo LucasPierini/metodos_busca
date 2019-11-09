@@ -51,8 +51,8 @@ def create_path_string(path_or_node, next_node=False):
 def reset(map):
     ''' Reseta os nós para sua versão inicial '''
     for node in map.nodes:
-        node.status = NodeStatus.LIVRE
-        node.parent = None
+        map.nodes[node].status = NodeStatus.LIVRE
+        map.nodes[node].parent = None
 
     for rel in map.relations:
         rel.status = RelationStatus.NOVA

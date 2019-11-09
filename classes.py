@@ -16,6 +16,14 @@ class RelationStatus(Enum):
     EXPLORADO = 2
 
 
+class SearchTypes(Enum):
+
+    NAO_ORDENADA = 0
+    ORDENADA = 1
+    INFORMADA = 2
+
+
+
 class Node(object):
     ''' Indica um nó no percurso e seus atributos '''
 
@@ -129,7 +137,61 @@ class Map(object):
     ''' Funciona como uma lista que guarda todos os nós e suas relações'''
 
     def __init__(self):
-        self.nodes = []
+        self.nodes = {}
         self.relations = []
         self.start_node = None
         self.end_node = None
+
+
+
+def create_map_by_dict(_dict) -> Map:
+
+    if 'type' in _dict:
+
+        # Teste de Criação de Mapa para buscas não-ordenadas
+        if _dict['type'] == SearchTypes.NAO_ORDENADA:
+
+            # Valida se os campos do dicionário existem.
+            if 'nodes' in _dict and 'adjacent' in _dict and 'first' in _dict and 'last' in _dict:
+                return create_map_type_0(_dict)
+
+        elif _dict['type'] == SearchTypes.ORDENADA:
+
+            return None
+
+    return None
+
+
+def create_map_type_0(_dict) -> Map:
+    new_map = Map()
+    aux_dict = {}
+
+    try:
+        # Cria os nós
+        for node in _dict['nodes']:
+            aux_dict[ node['name'] ] = Node( node['name'] )
+
+        # Cria as Adjacencias
+        for adj in _dict['adjacent']:
+            for key, value in adj.items():
+                if key in aux_dict:
+                    for n in value:
+                        if n in aux_dict:
+                            aux_dict[key].adjacent_node.append(aux_dict[n])
+
+        for x in aux_dict:
+            new_map.nodes[x] = aux_dict[x]
+
+        new_map.start_node = new_map.nodes[_dict['first']]
+        new_map.end_node = new_map.nodes[_dict['last']]
+
+    except Exception as exc:
+        print(exc)
+        return None
+
+    # for key, value in new_map.nodes.items():
+    #     print(key, value, value.adjacent_node)
+    #     for x in value.adjacent_node:
+    #         print(type(x), x)
+
+    return new_map

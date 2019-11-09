@@ -64,10 +64,10 @@ def printa_busca_em_largura(map):
     return_dict = busca_em_largura(map)
 
     if return_dict['success']:
-        print('    - O nó', map.end_node.name, 'foi encontrado!')
-        print('    - Caminho percorrido:', return_dict['visiting_node_path'])
-        print('    - Caminho até o nó:', return_dict['final_node_path'])
+        print('\t- O nó', map.end_node.name, 'foi encontrado!')
+        print('\t- Caminho percorrido:', return_dict['visiting_node_path'])
+        print('\t- Caminho até o nó:', return_dict['final_node_path'])
 
     else:
-        print('    - O nó não pôde ser encontrado! :(')
+        print('\t- O nó não pôde ser encontrado! :(')
 
