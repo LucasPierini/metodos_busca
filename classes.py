@@ -17,7 +17,7 @@ class RelationStatus(Enum):
 
 
 class SearchTypes(Enum):
-
+    """ Enum utilizada nos dicionários de mapas para definir para qual tipo de busca o mapa se identifica """
     NAO_ORDENADA = 0
     ORDENADA = 1
 

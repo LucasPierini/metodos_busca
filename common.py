@@ -52,7 +52,13 @@ def base_path_string(node):
 
 
 def create_path_string(path_or_node, next_node=False):
-    ''' Cria uma string do percurso realizado até o nó. '''
+    """
+     Cria uma string do percurso realizado até o nó.
+
+    :param path_or_node: Node ou NodePath. Realiza um tratamento diferente baseado no tipo recebido
+    :param next_node: Inicialmente não recebe nada, usado apenas em chamadas recursivas
+    :return:
+    """
 
     if type(path_or_node) == NodePath:
         node_name = base_path_string(path_or_node.node)
