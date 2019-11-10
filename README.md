@@ -1,5 +1,6 @@
 # metodos_busca
 Busca em Largura, Busca em Profundidade, Backtracking, Busca Ordenada, Busca Gulosa e Algoritmo A*
+Utiliza python 3.7.3
 
 ## maps.py
 A lista map_dicts guarda os dicionários que são utilizados na criação de mapas.
