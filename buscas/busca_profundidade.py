@@ -43,7 +43,8 @@ def busca_em_profundidade(map):
 
         # Remove o último elemento da fila
         node.status = NodeStatus.FECHADO
-        print(' *** Nó', node.name, 'verificado.')
+        if not success:
+            print(' *** Nó', node.name, 'verificado.')
 
     # Remove o último ' > ' da string
     visiting_node_path = visiting_node_path[:-3]

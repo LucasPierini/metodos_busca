@@ -4,6 +4,7 @@ from buscas.busca_largura      import printa_busca_em_largura
 from buscas.busca_profundidade import printa_busca_em_profundidade
 from buscas.busca_backtracking import printa_busca_backtracking
 from buscas.busca_ordenada     import printa_busca_ordenada
+from buscas.busca_gulosa       import printa_busca_gulosa
 
 # try:
 
@@ -41,6 +42,8 @@ while True:
     elif user_input == 4 or user_input == '4':
         printa_busca_ordenada(map_list)
 
+    elif user_input == 5 or user_input == '5':
+        printa_busca_gulosa(map_list)
 
 
     # ------------------ #

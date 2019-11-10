@@ -11,6 +11,16 @@ def find_smaller_path(path_list) -> NodePath:
     return smaller
 
 
+def find_costless_path(path_list) -> NodePath:
+    costless = path_list[0]
+
+    for path in path_list:
+        if path.node.cost < costless.node.cost:
+            costless = path
+
+    return costless
+
+
 def get_another_node_from_relation(node, relation):
     if relation.node_1 == node:
         return relation.node_2

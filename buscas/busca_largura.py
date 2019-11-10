@@ -45,7 +45,8 @@ def busca_em_largura(map):
         # Remove o primeiro elemento da fila
         node.status = NodeStatus.FECHADO
         queue.pop(0)
-        print(' *** Nó', node.name, 'verificado.')
+        if not success:
+            print(' *** Nó', node.name, 'verificado.')
 
     # Remove o último ' > ' da string
     visiting_node_path = visiting_node_path[:-3]
@@ -72,7 +73,7 @@ def printa_busca_em_largura(map_list):
                 print('\n- O nó', map.end_node.name, 'foi encontrado!\n'
                       '- Caminho percorrido:', return_dict['visiting_node_path'],'\n'
                       '- Caminho até o nó:', return_dict['final_node_path']
-                      )
+                     )
 
             else:
                 print('- O nó não pôde ser encontrado! :(')

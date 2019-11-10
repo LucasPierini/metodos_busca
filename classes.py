@@ -65,11 +65,11 @@ class NodePath(object):
 
     def __init__(self, node, parent_node, prev_path, path_list, relation_list):
         '''
-            node: Node()                            - Indica o nó final deste caminho. \n
-            parent_node: Node()                     - Indica o nó que antecede este caminho. \n
-            prev_path: NodePath()                   - Indica o percurso até aquele nó. \n
-            path_list: List[ NodePath() ]           - Recebe uma lista de todos os NodePath já traçados. \n
-            relation_list: List[ NodeRelation() ]   - Recebe uma lista de todas as relações entre nós.
+            node: Node                            - Indica o nó final deste caminho. \n
+            parent_node: Node                     - Indica o nó que antecede este caminho. \n
+            prev_path: NodePath                   - Indica o percurso até aquele nó. \n
+            path_list: List[ NodePath ]           - Recebe uma lista de todos os NodePath já traçados. \n
+            relation_list: List[ NodeRelation ]   - Recebe uma lista de todas as relações entre nós.
         '''
 
         self.node = node
@@ -91,8 +91,15 @@ class NodePath(object):
             self.distance = 0
 
 
-    def adjust_best_path(self, path_list):
-        ''' Chamada ao criar um novo NodePath(). Busca todos os NodePath que terminam no mesmo lugar e remove aqueles de maior distância total '''
+    def adjust_best_path(self, path_list, search_type="ordenada"):
+        """
+        Chamada ao criar um novo NodePath(). 
+        Busca todos os NodePath que terminam no mesmo lugar e remove aqueles de maior distância total
+        
+        :param path_list: 
+        :param search_type: 
+        :return: 
+        """
 
         # Define o parente do nó
         self.node.parent = self.parent_node
@@ -103,18 +110,33 @@ class NodePath(object):
             # Se os nós finais coincidirem, remove o caminho com maior distância
             if path.node == self.node and path != self:
 
-                # Dá preferência por manter os caminhos antigos. Não faz diferença de qualquer forma.
-                if self.distance >= path.distance:
+                if search_type == "ordenada":
+                    # Dá preferência por manter os caminhos antigos. Não faz diferença de qualquer forma.
+                    if self.distance >= path.distance:
 
-                    # Reajusta o parente do nó para o anterior.
-                    self.node.parent = path.parent_node
-                    print('  *** Este novo caminho é mais longo que o anterior, portanto será removido.')
-                    path_list.remove(self)
+                        # Reajusta o parente do nó para o anterior.
+                        self.node.parent = path.parent_node
+                        print('  *** Este novo caminho é mais longo que o anterior, portanto será removido.')
+                        path_list.remove(self)
 
-                else:
-                    print('  *** Este novo caminho até', self.node, 'é mais curto! ( Distância Total: ', self.distance,
-                          ' )')
-                    path_list.remove(path)
+                    else:
+                        print('  *** Este novo caminho até', self.node, 'é mais curto! ( Distância Total: ', self.distance,
+                              ' )')
+                        path_list.remove(path)
+
+                elif search_type == "gulosa":
+
+                    if self.node.cost >= path.node.cost:
+                        # Reajusta o parente do nó para o anterior.
+                        self.node.parent = path.parent_node
+                        print('  *** Este novo caminho é mais longo que o anterior, portanto será removido.')
+                        path_list.remove(self)
+
+                    else:
+                        print('  *** Este novo caminho até', self.node, 'é mais curto! ( Distância Total: ',
+                              self.distance,
+                              ' )')
+                        path_list.remove(path)
 
 
 def find_relation(node1, node2, relation_list):
