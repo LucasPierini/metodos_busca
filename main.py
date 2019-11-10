@@ -5,6 +5,7 @@ from buscas.busca_profundidade import printa_busca_em_profundidade
 from buscas.busca_backtracking import printa_busca_backtracking
 from buscas.busca_ordenada     import printa_busca_ordenada
 from buscas.busca_gulosa       import printa_busca_gulosa
+from buscas.busca_a_estrela    import printa_busca_a_estrela
 
 # try:
 
@@ -22,8 +23,8 @@ while True:
     print('2. Realizar Busca em Profundidade')
     print('3. Realizar Backtracking')
     print('4. Realizar Busca Ordenada')
-    print('X. Realizar Busca Gulosa')
-    print('X. Realizar Busca A*')
+    print('5. Realizar Busca Gulosa')
+    print('6. Realizar Busca A*')
 
     print('\n0. Sair \n')
 
@@ -44,6 +45,9 @@ while True:
 
     elif user_input == 5 or user_input == '5':
         printa_busca_gulosa(map_list)
+
+    elif user_input == 6 or user_input == '6':
+        printa_busca_a_estrela(map_list)
 
 
     # ------------------ #

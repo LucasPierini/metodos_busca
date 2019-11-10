@@ -1,24 +1,37 @@
 from classes import *
 from maps import *
 
-def find_smaller_path(path_list) -> NodePath:
-    ''' Retorna o NodePath de menor distância de uma lista '''
-    smaller = path_list[0]
-    for path in path_list:
-        if path.distance < smaller.distance:
-            smaller = path
+def find_lower_path(path_list, count_type="ordenada") -> NodePath:
+    """
+    Retorna o "menor" NodePath de uma lista. Pode ser baseado em:
+        * Distância entre nós (ordenada)
+        * Custo de cada nó (gulosa)
+        * No somatório de distância e custo (A estrela)
 
-    return smaller
+    :param path_list: lista com todos os NodePath's da busca
+    :param count_type: string contendo o tipo de comparativo de tamanho
+    :return: NodePath
+    """
+    lower = path_list[0]
+
+    if count_type == "ordenada":
+        for path in path_list:
+            if path.distance < lower.distance:
+                lower = path
+
+    elif count_type == "gulosa":
+        for path in path_list:
+            if path.node.cost < lower.node.cost:
+                lower = path
+
+    elif count_type == "a_estrela":
+        for path in path_list:
+            if (path.node.cost + path.distance) < (lower.node.cost + lower.distance):
+                lower = path
+
+    return lower
 
 
-def find_costless_path(path_list) -> NodePath:
-    costless = path_list[0]
-
-    for path in path_list:
-        if path.node.cost < costless.node.cost:
-            costless = path
-
-    return costless
 
 
 def get_another_node_from_relation(node, relation):

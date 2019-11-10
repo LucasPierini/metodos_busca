@@ -93,12 +93,12 @@ class NodePath(object):
 
     def adjust_best_path(self, path_list, search_type="ordenada"):
         """
-        Chamada ao criar um novo NodePath(). 
+        Chamada ao criar um novo NodePath().
         Busca todos os NodePath que terminam no mesmo lugar e remove aqueles de maior distância total
-        
-        :param path_list: 
-        :param search_type: 
-        :return: 
+
+        :param path_list:
+        :param search_type:
+        :return:
         """
 
         # Define o parente do nó
@@ -110,33 +110,54 @@ class NodePath(object):
             # Se os nós finais coincidirem, remove o caminho com maior distância
             if path.node == self.node and path != self:
 
+                # Define o menor caminho baseado na distância
                 if search_type == "ordenada":
+
                     # Dá preferência por manter os caminhos antigos. Não faz diferença de qualquer forma.
                     if self.distance >= path.distance:
 
                         # Reajusta o parente do nó para o anterior.
                         self.node.parent = path.parent_node
-                        print('  *** Este novo caminho é mais longo que o anterior, portanto será removido.')
+                        print('  *** Este novo caminho ( Dist.:', self.distance,
+                              ') é maior ou igual ao anterior ( Dist.:', path.distance,
+                              '), portanto será desconsiderado.')
                         path_list.remove(self)
 
                     else:
-                        print('  *** Este novo caminho até', self.node, 'é mais curto! ( Distância Total: ', self.distance,
-                              ' )')
+                        print('  *** Este novo caminho até', self.node,
+                              'é mais curto! ( Distância Total: ', self.distance,')')
                         path_list.remove(path)
 
+                # Define o menor caminho baseado no custo
                 elif search_type == "gulosa":
 
+                    # Dá preferência por manter os caminhos antigos. Não faz diferença de qualquer forma.
                     if self.node.cost >= path.node.cost:
                         # Reajusta o parente do nó para o anterior.
                         self.node.parent = path.parent_node
-                        print('  *** Este novo caminho é mais longo que o anterior, portanto será removido.')
                         path_list.remove(self)
 
                     else:
-                        print('  *** Este novo caminho até', self.node, 'é mais curto! ( Distância Total: ',
-                              self.distance,
-                              ' )')
                         path_list.remove(path)
+
+                # Define o menor caminho baseado na distância E no custo (somatório)
+                else:
+
+                    # Dá preferência por manter os caminhos antigos. Não faz diferença de qualquer forma.
+                    if (self.distance + self.node.cost) >= (path.distance + path.node.cost):
+
+                        # Reajusta o parente do nó para o anterior.
+                        self.node.parent = path.parent_node
+                        print('  *** Este novo caminho ( Dist. + Custo:', str(self.distance + self.node.cost),
+                              ') é maior ou igual ao anterior ( Dist. + Custo:', str(path.distance + path.node.cost),
+                              '), portanto será desconsiderado.')
+                        path_list.remove(self)
+
+                    else:
+                        print('  *** Este novo caminho até', self.node,
+                              'é mais curto! ( Dist. + Custo:', str(self.distance + self.node.cost),')')
+                        path_list.remove(path)
+
 
 
 def find_relation(node1, node2, relation_list):

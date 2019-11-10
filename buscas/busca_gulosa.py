@@ -9,7 +9,7 @@ def busca_gulosa(map):
     path_list = [NodePath(map.start_node, None, None, [], map.relations)]
 
     while len(path_list) and not success:
-        path = find_costless_path(path_list)
+        path = find_lower_path(path_list, 'gulosa')
 
         if path.node == map.end_node:
             success = True
@@ -19,7 +19,7 @@ def busca_gulosa(map):
             if not path.parent_node:
                 print('* Começando pelo nó', path.node)
             else:
-                print('\n* Checando próximo caminho menos custoso: de', path.parent_node, 'até', path.node)
+                print('\n* Checando pelo próximo nó menos custoso:', path.node)
 
             for rel in path.node.relations:
 
@@ -29,7 +29,7 @@ def busca_gulosa(map):
                     parent = path.node
 
                     path_list.append(NodePath(node, parent, path, path_list, map.relations))
-                    print(' ** Encontrado caminho de', parent, 'até', node)
+                    print(' ** Encontrado caminho de', parent, 'até', node, '( Custo:', node.cost, ')')
 
                     path_list[-1].adjust_best_path(path_list, "gulosa")
 
